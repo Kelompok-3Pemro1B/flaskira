@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Buku</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>💜📚🪻 BOOKMYS 🪻📚💜</header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="book-container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Penulis</th>
+                <th>Judul Buku</th>
+                <th>Harga</th>
+            </tr>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.penulis }}</td>
+                <td>{{ book.judul_buku }}</td>
+                <td>{{ book.harga }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Tambah Buku (PUSH)</h2>
+        <form action="/add_book" method="post">
+            <label for="penulis">Penulis:</label>
+            <input type="text" name="penulis" required>
+
+            <label for="judul_buku">Judul Buku:</label>
+            <input type="text" name="judul_buku" required>
+
+            <label for="harga">Harga:</label>
+            <input type="number" name="harga" required>
+
+            <button type="submit">Tambah Buku</button>
+        </form>
+
+        <h2>Cari Buku (Get by ID)</h2>
+        <form action="/get_book" method="get">
+            <label for="id">ID Buku:</label>
+            <input type="number" name="id" required>
+
+            <button type="submit">Cari Buku</button>
+        </form>
+
+        <h2>Edit Buku (PUT)</h2>
+        <form action="/update_book" method="post">
+            <label for="id">ID Buku yang Mau Diedit:</label>
+            <input type="number" name="id" required>
+
+            <label for="penulis">Penulis:</label>
+            <input type="text" name="penulis" required>
+
+            <label for="judul_buku">Judul Buku:</label>
+            <input type="text" name="judul_buku" required>
+
+            <label for="harga">Harga:</label>
+            <input type="number" name="harga" required>
+
+            <button type="submit">Update Buku</button>
+        </form>
+
+        <h2>Hapus Buku (DEL)</h2>
+        <form action="/delete_book" method="post">
+            <label for="id">ID Buku yang Mau Dihapus:</label>
+            <input type="number" name="id" required>
+
+            <button type="submit" style="background-color: #ff6b6b;">Hapus Buku</button>
+        </form>
+    </div>
+</body>
+</html>
+
