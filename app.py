@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for, f
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.secret_key = 'secret123'  # <-- Wajib untuk Flash Message
+app.secret_key = 'secret123'  # untuk Flash Message
 
 # Konfigurasi untuk MySQL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/booksmy'
